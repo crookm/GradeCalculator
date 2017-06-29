@@ -8,6 +8,7 @@ namespace GradeCalculator
     {
         static void Main(string[] args)
         {
+        Start:
             Dictionary<string, GradeGroup> Groups = new Dictionary<string, GradeGroup>();
             string Name = null;
             string Weighting = null;
@@ -51,10 +52,11 @@ namespace GradeCalculator
 
             Console.Write("\nDoes this look okay? (y)/n: ");
             ConsoleKeyInfo InputCheckGradeGroup = Console.ReadKey();
+            Console.WriteLine("\n");
             if (InputCheckGradeGroup.KeyChar == 'n')
             {
             ChangeGradeGroups:
-                Console.Write("\nName of group to change: ");
+                Console.Write("Name of group to change: ");
                 string GroupKey = Console.ReadLine();
 
                 if (Groups.ContainsKey(GroupKey.ToLower()))
@@ -140,6 +142,16 @@ namespace GradeCalculator
 
             decimal OverallGrade = GroupGrades.Sum();
             Console.WriteLine(String.Format("Overall Grade: {0}%", OverallGrade * 100));
+
+            Console.Write("\n\nCalculate another course? y/(n): ");
+            ConsoleKeyInfo InputCheckStartAgain = Console.ReadKey();
+            Console.WriteLine("\n");
+            if (InputCheckStartAgain.KeyChar == 'y')
+            {
+                goto Start;
+            }
+
+            return;
         }
     }
 }
